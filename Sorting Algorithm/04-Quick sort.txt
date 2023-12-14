@@ -1,0 +1,50 @@
+//Quick sort
+#include<iostream>
+using namespace std;
+int part(int a[],int lb,int ub)
+{
+    int p,s,e;
+    p=a[lb];
+    s=lb;
+    e=ub;
+    while(s<e){
+        while(a[s]<=p){
+            s++;
+        }
+        while(a[e]>p){
+            e--;
+        }
+        if(s<e){
+            swap(a[s],a[e]);
+        }
+    }
+    swap(a[lb],a[e]);
+    return e;
+}
+void qsort(int a[],int lb,int ub)
+{
+    int loc;
+    if(lb<ub){
+        loc=part(a,lb,ub);
+        qsort(a,lb,loc-1);
+        qsort(a,loc+1,ub);
+    }
+}
+void trav(int a[],int n)
+{
+    for(int i=0;i<n;i++){
+        cout<<a[i]<<" ";
+    }
+}
+int main()
+{
+    int n;
+    cin>>n;
+    int a[n];
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+    }
+    qsort(a,0,n-1);
+    cout<<"after sort"<<endl;
+    trav(a,n);
+}
