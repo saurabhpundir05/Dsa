@@ -1,0 +1,55 @@
+#include<iostream>
+using namespace std;
+#define n 5
+class queue {
+    int *a;
+    int front, back;
+public:
+    queue() {
+        a = new int[n];
+        front = -1;
+        back = -1;
+    }
+    void enqueue(int x) {
+        if (back == n - 1) {
+            cout << "Overflow" << endl;
+            return;
+        }
+        back++;
+        a[back] = x;
+        if (front == -1) {
+            front++;
+        }
+    }
+    void dequeue() {
+        if (front == -1 || front > back) {
+            cout << "Empty queue" << endl;
+            return;
+        }
+        for (int i = front; i < back; i++) {
+            a[i] = a[i + 1];
+        }
+
+        back--;
+    }
+    int peek() {
+        if (front == -1 || front > back) {
+            cout << "Empty queue" << endl;
+            return -1;
+        }
+        return a[front];
+    }
+    bool empty() {
+        return (front == -1 || front > back);
+    }
+};
+int main() {
+    queue q;
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    cout << q.peek() << endl;
+    q.dequeue();
+    cout << q.peek() << endl;
+    return 0;
+}
