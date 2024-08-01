@@ -1,44 +1,34 @@
-//Merge sort
-#include<iostream>
+//Merge Sort
+#include<bits/stdc++.h>
 using namespace std;
-int merges(int a[],int lb,int mid,int ub)
-{
-    int i,j,k;
-    int b[ub+1];
-    i=lb;
-    j=mid+1;
-    k=lb;
-    while(i<=mid && j<=ub){
-        if(a[i]<=a[j]){
-            b[k]=a[i];
-            i++;
+void merges(int a[],int lb,int mid,int ub){
+    vector<int>temp;
+    int left=lb;
+    int right=mid+1;
+    while(left<=mid && right<=ub){
+        if(a[left]<=a[right]){
+            temp.push_back(a[left]);
+            left++;
         }
         else{
-            b[k]=a[j];
-            j++;
-        }
-        k++;
-    }
-    if(i>mid){
-        while(j<=ub){
-                b[k]=a[j];
-                j++;
-                k++;
+            temp.push_back(a[right]);
+            right++;
         }
     }
-    else{
-        while(i<=mid){
-            b[k]=a[i];
-            i++;
-            k++;
-        }
+    while(left<=mid){
+        temp.push_back(a[left]);
+        left++;
     }
-    for(k=lb;k<=ub;k++){
-        a[k]=b[k];
+    while(right<=ub){
+        temp.push_back(a[right]);
+        right++;
     }
+    for(int i=lb;i<=ub;i++){
+        a[i]=temp[i-lb];
+    }
+
 }
-void msort(int a[],int lb,int ub)
-{
+void msort(int a[],int lb,int ub){
     int mid;
     if(lb<ub){
         mid=lb+(ub-lb)/2;
@@ -47,14 +37,7 @@ void msort(int a[],int lb,int ub)
         merges(a,lb,mid,ub);
     }
 }
-void trav(int a[],int n)
-{
-    for(int i=0;i<n;i++){
-        cout<<a[i]<<" ";
-    }
-}
-int main()
-{
+int main(){
     int n;
     cin>>n;
     int a[n];
@@ -63,5 +46,7 @@ int main()
     }
     msort(a,0,n-1);
     cout<<"after sort"<<endl;
-    trav(a,n);
+    for(int i=0;i<n;i++){
+        cout<<a[i]<<" ";
+    }
 }
