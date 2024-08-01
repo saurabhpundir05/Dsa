@@ -1,17 +1,16 @@
-//Quick sort
+//Quick Sort
 #include<iostream>
 using namespace std;
-int part(int a[],int lb,int ub)
-{
-    int p,s,e;
-    p=a[lb];
+int part(int a[],int lb,int ub){
+    int pivot,s,e;
+    pivot=a[lb];
     s=lb;
     e=ub;
     while(s<e){
-        while(a[s]<=p){
+        while(a[s]<=pivot){
             s++;
         }
-        while(a[e]>p){
+        while(a[e]>pivot){
             e--;
         }
         if(s<e){
@@ -21,8 +20,7 @@ int part(int a[],int lb,int ub)
     swap(a[lb],a[e]);
     return e;
 }
-void qsort(int a[],int lb,int ub)
-{
+void qsort(int a[],int lb,int ub){
     int loc;
     if(lb<ub){
         loc=part(a,lb,ub);
@@ -30,14 +28,7 @@ void qsort(int a[],int lb,int ub)
         qsort(a,loc+1,ub);
     }
 }
-void trav(int a[],int n)
-{
-    for(int i=0;i<n;i++){
-        cout<<a[i]<<" ";
-    }
-}
-int main()
-{
+int main(){
     int n;
     cin>>n;
     int a[n];
@@ -46,5 +37,7 @@ int main()
     }
     qsort(a,0,n-1);
     cout<<"after sort"<<endl;
-    trav(a,n);
+    for(int i=0;i<n;i++){
+        cout<<a[i]<<" ";
+    }
 }
